@@ -1,43 +1,36 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableHighlight, FlatList } from "react-native";
-import City from "../components/City";
-import FormAddCity from "../components/FormAddCity";
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import CitiesList from "../components/CitiesList"
+import FormAddCity from "../components/FormAddCity"
 
 export default function Cities() {
+  
+  const [ showForm, setShowForm ] = useState(false)
 
-  const [ ciudades, setCiudades ] = useState([])
-
-  const [ mostrarForm, guardarMostrarForm ] = useState(true)
-
-  const showForm = () => {
-    guardarMostrarForm(!mostrarForm)
+  const showForm1 = () => {
+    setShowForm(!showForm)
   }
 
   return (
+    <>
     <View>
+      <TouchableHighlight style={styles.btnShow}>
+        <Text style={styles.textShow} onPress={()=>showForm1() }>{ showForm ? "Cancelar" : "Agregar ciudad" }</Text>
+      </TouchableHighlight>
+    </View>
 
-      <View>
-        <TouchableHighlight style={styles.btnShow}>
-          <Text style={styles.textShow} onPress={()=>showForm() }>{ mostrarForm ? "Cancelar" : "Agregar ciudad" }</Text>
-        </TouchableHighlight>
-      </View>
-
-      { mostrarForm ? 
+    { showForm ? 
       (<>
         <Text style={styles.titulo}>Agregar ciudad</Text>
-        <FormAddCity ciudades={ciudades} setCiudades={setCiudades} guardarMostrarForm={guardarMostrarForm} />
+        <FormAddCity setShowForm={setShowForm} />
       </>) : 
       (<>
-        <Text style={styles.titulo}>{ciudades.length > 0 ? 'Listado de ciudades' : 'No hay ciudades, agrega una'}</Text>
-        <FlatList
-          data={ciudades}
-          renderItem={ ({item})=> <City item={item} />}
-            keyExtractor={ ciudad => ciudad.id}
-        />
+        <Text style={styles.titulo}>Listado de ciudades</Text>
+        <CitiesList />
       </>)
       }
       
-    </View>
+    </>
   );
 }
 
