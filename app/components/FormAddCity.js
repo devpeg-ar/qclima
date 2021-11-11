@@ -1,32 +1,31 @@
 import React, { useState } from "react"
-import { Text, View, TextInput, TouchableHighlight, StyleSheet, Alert } from "react-native"
-import shortid from "shortid"
+import { Text, View, TextInput, TouchableHighlight, StyleSheet } from "react-native"
+import firebase from "../utils/firebase"
 
-export default function FormAddCity({ciudades, setCiudades, guardarMostrarForm}) {
+export default function FormAddCity({setShowForm}) {
 
-    const [ city, setCity ] = useState('')
+    const [cities, setCities] = useState({
+        nameCity: ''
+    })
 
-    const addCity = () => {
-        if (city.trim()==='') {
-            mostrarAlerta()
-            return
-        }
-        const ciudad = { city }
-        ciudad.id = shortid.generate()
-        const ciudadNueva = [...ciudades, ciudad]
-        setCiudades(ciudadNueva)
-        console.log(ciudad)
-        guardarMostrarForm()
+    const handleChangeText = (name, value) => {
+        setCities({...cities, [name]: value})
     }
 
-    const mostrarAlerta = () => {
-        Alert.alert(
-            'Error',
-            'Todos los campos son obligatorios',
-            [{
-                text: "Aceptar"
-            }]
-        )
+    const saveNewCity = async () => {
+        if (cities.nameCity === ''){
+            alert('Completa el campo')
+        } else {
+            try {
+                await firebase.db.collection('cities').add({
+                    nameCity: cities.nameCity
+                })
+                setShowForm(false)
+            } catch (error) {
+                console.log(error)
+            }
+            
+        }
     }
 
     return (
@@ -35,13 +34,13 @@ export default function FormAddCity({ciudades, setCiudades, guardarMostrarForm})
             <View>
                 <Text style={styles.label}>Ciudad:</Text>
                 <TextInput 
-                    style={styles.input} 
-                    onChangeText={text=>setCity(text)} 
+                    style={styles.input}
+                    onChangeText={text=>handleChangeText('nameCity', text)}  
                 />
             </View>
 
             <View>
-                <TouchableHighlight style={styles.btnSave} onPress={()=> addCity() }>
+                <TouchableHighlight style={styles.btnSave} onPress={()=> saveNewCity()}>
                     <Text style={styles.textSave}>Guardar</Text>
                 </TouchableHighlight>
             </View>
