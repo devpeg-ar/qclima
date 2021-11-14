@@ -1,36 +1,66 @@
 import React from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Home from "../screens/Home";
 import About from "../screens/About";
-import Cities from "../screens/Cities";
+import Cities from "../navigation/CitiesStack";
 import Map from "../screens/Map";
 
-const drawer = createDrawerNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 export default function Navigation() {
   return (
-    <drawer.Navigator>
-      <drawer.Screen
-        name="home"
+    <Tab.Navigator
+      labeled={false}
+      barStyle={{ backgroundColor: "black" }}
+      activeColor="white"
+      initialRouteName="Home"
+    >
+      <Tab.Screen
+        name="Home"
         component={Home}
-        options={{ title: "Inicio" }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcon name="home" color={color} size={26} />
+          ),
+        }}
       />
-      <drawer.Screen
-        name="cities"
+      <Tab.Screen
+        name="CitiesStack"
         component={Cities}
-        options={{ title: "Listado de ciudades" }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcon
+              name="format-list-bulleted"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
       />
-      <drawer.Screen
-        name="map"
+      <Tab.Screen
+        name="Map"
         component={Map}
-        options={{ title: "Mapa de ciudades" }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcon name="map" color={color} size={26} />
+          ),
+        }}
       />
-      <drawer.Screen
-        name="about"
+      <Tab.Screen
+        name="About"
         component={About}
-        options={{ title: "Acerca de" }}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcon
+              name="information-outline"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
       />
-    </drawer.Navigator>
+    </Tab.Navigator>
   );
 }
