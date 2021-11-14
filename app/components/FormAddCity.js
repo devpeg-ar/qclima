@@ -1,80 +1,78 @@
-import React, { useState } from "react"
-import { Text, View, TextInput, TouchableHighlight, StyleSheet } from "react-native"
-import firebase from "../utils/firebase"
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableHighlight,
+  StyleSheet,
+  Alert,
+} from "react-native";
 
-export default function FormAddCity({setShowForm}) {
+import { SearchButton } from "../components/Buttons";
 
-    const [cities, setCities] = useState({
-        nameCity: ''
-    })
+export default function FormAddCity({ search, saveSearch, saveQuery }) {
+  const { city } = search;
 
-    const handleChangeText = (name, value) => {
-        setCities({...cities, [name]: value})
+  const searchCity = () => {
+    if (city.trim() === "") {
+      showAlert();
+      return;
     }
+    saveQuery(true);
+  };
 
-    const saveNewCity = async () => {
-        if (cities.nameCity === ''){
-            alert('Completa el campo')
-        } else {
-            try {
-                await firebase.db.collection('cities').add({
-                    nameCity: cities.nameCity
-                })
-                setShowForm(false)
-            } catch (error) {
-                console.log(error)
-            }
-            
-        }
-    }
+  const showAlert = () => {
+    Alert.alert("Error", "El campo ciudad no puede esta vacio", [
+      { text: "Volver" },
+    ]);
+  };
 
-    return (
-        <View style={styles.form} >
-
-            <View>
-                <Text style={styles.label}>Ciudad:</Text>
-                <TextInput 
-                    style={styles.input}
-                    onChangeText={text=>handleChangeText('nameCity', text)}  
-                />
-            </View>
-
-            <View>
-                <TouchableHighlight style={styles.btnSave} onPress={()=> saveNewCity()}>
-                    <Text style={styles.textSave}>Guardar</Text>
-                </TouchableHighlight>
-            </View>
-
-        </View>
-    )
+  return (
+    <View style={styles.form}>
+      <View>
+        <TextInput
+          value={city}
+          style={styles.input}
+          onChangeText={(city) => saveSearch({ ...search, city })}
+          placeholder="Ingrese la ciudad a buscar"
+          placeholderTextColor="#666"
+        />
+      </View>
+      <View>
+        <SearchButton text="Buscar" onPress={() => searchCity()} />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    form: {
-        paddingHorizontal: 20,
-        paddingVertical: 10,
-        marginHorizontal: '2.5%'
-    },
-    label: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginTop: 20
-    },
-    input: {
-        marginTop: 10,
-        height: 50,
-        borderWidth: 2,
-        borderStyle: 'solid',
-    },
-    btnSave: {
-        padding: 10,
-        backgroundColor: 'green',
-        marginVertical: 10
-    },
-    textSave: {
-        fontSize: 18,
-        color: '#FFF',
-        fontWeight: 'bold',
-        textAlign: 'center'
-    }
-})
+  form: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    marginHorizontal: "2.5%",
+  },
+  label: {
+    fontWeight: "bold",
+    fontSize: 18,
+    marginTop: 20,
+  },
+  input: {
+    padding: 10,
+    height: 50,
+    backgroundColor: "#fff",
+    fontSize: 18,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  btnSave: {
+    padding: 10,
+    backgroundColor: "green",
+    marginVertical: 10,
+  },
+  textSave: {
+    fontSize: 18,
+    color: "#FFF",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});
