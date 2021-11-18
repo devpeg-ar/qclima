@@ -22,9 +22,7 @@ export default function CitiesList() {
   }, []);
 
   const deleteCity = async (city) => {
-    console.log(city)
-    const dbRef = firebase.db.collection('cities').doc(city.id)
-    console.log(dbRef)
+    const dbRef = firebase.db.collection('cities').doc(city.id)   
     await dbRef.delete()
   }
 
