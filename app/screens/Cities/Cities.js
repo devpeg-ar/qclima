@@ -1,22 +1,30 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+  ScrollView,
+} from "react-native";
 import CitiesList from "../../components/CitiesList";
 
 export default function Cities({ navigation }) {
   return (
-    <View style={styles.container}>
-      <TouchableHighlight style={styles.btnShow}>
-        <Text
-          style={styles.textShow}
-          onPress={() => navigation.navigate("AddCity")}
-        >
-          Agregar ciudad
-        </Text>
-      </TouchableHighlight>
-      <View>
-        <CitiesList />
+    <ScrollView>
+      <View style={styles.container}>
+        <TouchableHighlight style={styles.btnShow}>
+          <Text
+            style={styles.textShow}
+            onPress={() => navigation.navigate("AddCity")}
+          >
+            Agregar ciudad
+          </Text>
+        </TouchableHighlight>
+        <View>
+          <CitiesList navigation={navigation} />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

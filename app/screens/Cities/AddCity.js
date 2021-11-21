@@ -32,7 +32,7 @@ export default function AddCity() {
           const answer = await fetch(urlApi);
           const result = await answer.json();
           saveResult(result);
-          saveSearch(false);
+          saveQuery(false);
         } catch (error) {
           console.log(error);
           showAlert();
