@@ -22,6 +22,11 @@ export default function CitiesList({ navigation }) {
     });
   }, []);
 
+  const deleteCity = async (city) => {
+    const dbRef = firebase.db.collection("cities").doc(city.id);
+    await dbRef.delete();
+  };
+
   return (
     <ScrollView>
       {cities.map((city) => {
@@ -34,6 +39,7 @@ export default function CitiesList({ navigation }) {
                 city: city.nameCity,
               })
             }
+            onLongPress={() => deleteCity(city)}
           >
             <ListItem.Chevron />
             <ListItem.Content>
