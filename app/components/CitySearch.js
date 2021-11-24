@@ -11,7 +11,7 @@ import firebase from "../utils/firebase";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 const CitySearch = ({ result }) => {
-  const { name, main } = result;
+  const { name, coord, main } = result;
   if (!name) return null;
   const kelvin = 273.15;
 
@@ -19,6 +19,8 @@ const CitySearch = ({ result }) => {
     try {
       await firebase.db.collection("cities").add({
         nameCity: name,
+        latCity: coord.lat,
+        lonCity: coord.lon
       });
       alert("Se ha guardado la ciudad");
     } catch (error) {
