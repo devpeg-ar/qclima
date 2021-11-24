@@ -20,6 +20,7 @@ const CitySearch = ({ result }) => {
       await firebase.db.collection("cities").add({
         nameCity: name,
       });
+      alert("Se ha guardado la ciudad");
     } catch (error) {
       console.log(error);
     }

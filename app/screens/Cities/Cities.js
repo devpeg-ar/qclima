@@ -1,46 +1,57 @@
 import React from "react";
 import {
   StyleSheet,
-  Text,
+  Image,
   View,
-  TouchableHighlight,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
+import { FAB } from "react-native-paper";
 import CitiesList from "../../components/CitiesList";
 
 export default function Cities({ navigation }) {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <TouchableHighlight style={styles.btnShow}>
-          <Text
-            style={styles.textShow}
-            onPress={() => navigation.navigate("AddCity")}
-          >
-            Agregar ciudad
-          </Text>
-        </TouchableHighlight>
-        <View>
+    <SafeAreaView style={styles.container}>
+      <Image style={styles.image} source={require("../../../assets/map.png")} />
+      <ScrollView>
+        <View style={styles.list}>
           <CitiesList navigation={navigation} />
         </View>
+      </ScrollView>
+      <View style={styles.btn}>
+        <FAB
+          style={styles.fab}
+          icon="plus"
+          onPress={() => navigation.navigate("AddCity")}
+        />
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
+    flex: 3,
+    backgroundColor: "#186CA1",
   },
-  btnShow: {
-    padding: 10,
-    backgroundColor: "green",
-    marginVertical: 10,
+  list: {
+    flex: 1,
   },
-  textShow: {
-    fontSize: 18,
-    color: "#FFF",
-    fontWeight: "bold",
-    textAlign: "center",
+  btn: {
+    flex: 1,
+  },
+  fab: {
+    position: "absolute",
+    right: 0,
+    bottom: 0,
+    margin: 16,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "80%",
+    height: "50%",
+    margin: 20,
   },
 });

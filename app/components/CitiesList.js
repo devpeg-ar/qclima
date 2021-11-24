@@ -5,7 +5,7 @@ import firebase from "../utils/firebase";
 
 export default function CitiesList({ navigation }) {
   const [cities, setCities] = useState([]);
-  const [result, saveResult] = useState({});
+  // const kelvin = 273;
 
   useEffect(() => {
     firebase.db.collection("cities").onSnapshot((querySnapshot) => {
@@ -25,6 +25,7 @@ export default function CitiesList({ navigation }) {
   const deleteCity = async (city) => {
     const dbRef = firebase.db.collection("cities").doc(city.id);
     await dbRef.delete();
+    alert("La ciudad ha sido borrada");
   };
 
   return (
@@ -44,7 +45,7 @@ export default function CitiesList({ navigation }) {
             <ListItem.Chevron />
             <ListItem.Content>
               <ListItem.Title>{city.nameCity}</ListItem.Title>
-              <ListItem.Subtitle>Temperatura: 25°</ListItem.Subtitle>
+              <ListItem.Subtitle>Temperatura 25º</ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         );
