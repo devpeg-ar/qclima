@@ -10,23 +10,31 @@ import {
 
 import { SearchButton } from "../components/Buttons";
 
-export default function FormAddCity({ search, saveSearch, saveQuery }) {
+export default function FormAddCity({ search, saveSearch, saveQuery, result }) {
+  const { cod } = result;
   const { city } = search;
 
   const searchCity = () => {
     if (city.trim() === "") {
-      showAlert();
+      showAlertCity();
       return;
+    } else if (cod === "404") {
+      showAlertCod();
     }
     saveQuery(true);
   };
 
-  const showAlert = () => {
+  const showAlertCity = () => {
     Alert.alert("Error", "El campo ciudad no puede esta vacio", [
       { text: "Volver" },
     ]);
   };
 
+  const showAlertCod = () => {
+    Alert.alert("Atención", "Su busqueda no arrojó ningun resultado", [
+      { text: "Volver" },
+    ]);
+  };
   return (
     <View style={styles.form}>
       <View>

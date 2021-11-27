@@ -10,7 +10,12 @@ const Stack = createStackNavigator();
 
 export default function citiesStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: "#f1f1f1",
+        headerStyle: { backgroundColor: "#31255a" },
+      }}
+    >
       <Stack.Screen
         name="Cities"
         component={Cities}

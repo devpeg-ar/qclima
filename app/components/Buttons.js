@@ -8,7 +8,7 @@ export function SearchButton(props) {
     <TouchableOpacity
       style={{
         ...styles.button,
-        backgroundColor: "#0a0a0a",
+        backgroundColor: "#31255a",
       }}
       onPress={onPress}
     >

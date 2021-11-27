@@ -9,10 +9,12 @@ import {
 import firebase from "../utils/firebase";
 // import { IconButton } from "../components/Buttons";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { Alert } from "react-native";
 
-const CitySearch = ({ result }) => {
+const CitySearch = ({ result, navigation }) => {
   const { name, coord, main } = result;
   if (!name) return null;
+
   const kelvin = 273.15;
 
   const saveNewCity = async () => {
@@ -20,16 +22,36 @@ const CitySearch = ({ result }) => {
       await firebase.db.collection("cities").add({
         nameCity: name,
         latCity: coord.lat,
-        lonCity: coord.lon
+        lonCity: coord.lon,
       });
-      alert("Se ha guardado la ciudad");
+      goBack();
     } catch (error) {
       console.log(error);
     }
   };
 
+  const alertAddCity = () => {
+    Alert.alert(
+      "Añadir ciudad",
+      "Se va a proceder a añadir la ciudad seleccionada. Continuar?",
+      [
+        {
+          text: "Cancelar",
+        },
+        {
+          text: "Ok",
+          onPress: () => saveNewCity(),
+        },
+      ]
+    );
+  };
+
+  const goBack = () => {
+    navigation.navigate("Cities");
+  };
+
   return (
-    <TouchableHighlight onPress={() => saveNewCity()} style={styles.container}>
+    <TouchableHighlight onPress={() => alertAddCity()} style={styles.container}>
       <View>
         <Text style={styles.text}>
           {name}
@@ -55,9 +77,9 @@ const styles = StyleSheet.create({
   container: {
     width: "90%",
     height: 100,
-    backgroundColor: "#a12b8d",
-    // borderRadius: 50,
+    backgroundColor: "#54416d",
     alignSelf: "center",
+    borderRadius: 10,
   },
   text: {
     textAlign: "center",

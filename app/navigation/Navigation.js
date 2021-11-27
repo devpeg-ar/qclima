@@ -12,16 +12,16 @@ const Tab = createMaterialBottomTabNavigator();
 export default function Navigation() {
   return (
     <Tab.Navigator
-      labeled={false}
-      barStyle={{ backgroundColor: "black" }}
-      activeColor="white"
+      barStyle={{ backgroundColor: "#31255a" }}
+      activeColor="#75b4e3"
       initialRouteName="Home"
     >
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ color, size }) => (
+          title: "Inicio",
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcon name="home" color={color} size={26} />
           ),
         }}
@@ -30,7 +30,8 @@ export default function Navigation() {
         name="CitiesStack"
         component={Cities}
         options={{
-          tabBarIcon: ({ color, size }) => (
+          title: "Listado",
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcon
               name="format-list-bulleted"
               color={color}
@@ -43,7 +44,8 @@ export default function Navigation() {
         name="Map"
         component={Map}
         options={{
-          tabBarIcon: ({ color, size }) => (
+          title: "Mapa",
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcon name="map" color={color} size={26} />
           ),
         }}
@@ -52,7 +54,8 @@ export default function Navigation() {
         name="About"
         component={About}
         options={{
-          tabBarIcon: ({ color, size }) => (
+          title: "Quienes somos?",
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcon
               name="information-outline"
               color={color}

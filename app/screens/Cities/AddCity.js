@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
-  Text,
+  ImageBackground,
   TouchableWithoutFeedback,
-  FlatList,
   Keyboard,
   Alert,
 } from "react-native";
 import Formulario from "../../components/FormAddCity";
-import SearchResult from "../../components/CitySearch";
 import CitySearch from "../../components/CitySearch";
 
-export default function AddCity() {
+export default function AddCity({ navigation }) {
   const [search, saveSearch] = useState({
     city: "",
   });
@@ -32,6 +30,7 @@ export default function AddCity() {
           const answer = await fetch(urlApi);
           const result = await answer.json();
           saveResult(result);
+          console.log(result);
           saveQuery(false);
         } catch (error) {
           console.log(error);
@@ -57,16 +56,23 @@ export default function AddCity() {
   return (
     <TouchableWithoutFeedback onPress={() => ocultarTeclado()}>
       <View style={styles.container}>
-        <View>
-          <Formulario
-            search={search}
-            saveSearch={saveSearch}
-            saveQuery={saveQuery}
-          />
-        </View>
-        <View>
-          <CitySearch result={result} />
-        </View>
+        <ImageBackground
+          source={require("../../../assets/fondo.png")}
+          resizeMode="cover"
+          style={styles.bkgImage}
+        >
+          <View>
+            <Formulario
+              search={search}
+              saveSearch={saveSearch}
+              saveQuery={saveQuery}
+              result={result}
+            />
+          </View>
+          <View style={styles.result}>
+            <CitySearch result={result} navigation={navigation} />
+          </View>
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -75,7 +81,14 @@ export default function AddCity() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#186CA1",
+    backgroundColor: "#75b4e3",
+    justifyContent: "center",
+  },
+  result: {
+    marginVertical: 20,
+  },
+  bkgImage: {
+    flex: 1,
     justifyContent: "center",
   },
 });

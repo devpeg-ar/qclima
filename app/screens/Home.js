@@ -1,10 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text>Home....</Text>
+      <ImageBackground
+        style={styles.img}
+        source={require("../../assets/fondo.png")}
+        resizeMode="cover"
+      >
+        <Text>Home</Text>
+      </ImageBackground>
     </View>
   );
 }
@@ -12,7 +18,9 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  img: {
+    flex: 1,
     justifyContent: "center",
-    alignItems: "center",
   },
 });

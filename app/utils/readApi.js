@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 export default function getTemp(city, query) {
-  const [kelvin, saveKelvin] = useState();
+  const [icon, setIcon] = useState({});
+  const [temp, setTemp] = useState();
+  const [feels, setFeels] = useState();
+  const [humidity, setHumidity] = useState();
+  const [pressure, setPressure] = useState();
+  const [max, setMax] = useState();
+  const [min, setMin] = useState();
 
   useEffect(() => {
     const searchCity = async () => {
@@ -11,7 +17,13 @@ export default function getTemp(city, query) {
         try {
           const answer = await fetch(urlApi);
           const result = await answer.json();
-          saveKelvin(result.main.temp);
+          setTemp(result.main.temp);
+          setIcon(result.weather[0].icon);
+          setFeels(result.main.feels_like);
+          setHumidity(result.main.humidity);
+          setPressure(result.main.pressure);
+          setMax(result.main.temp_max);
+          setMin(result.main.temp_min);
         } catch (error) {
           console.log(error);
         }
@@ -20,5 +32,6 @@ export default function getTemp(city, query) {
     searchCity();
   }, [query]);
 
-  return kelvin;
+  const getData = [temp, icon, feels, humidity, pressure, max, min];
+  return getData;
 }
