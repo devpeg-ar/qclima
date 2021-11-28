@@ -7,8 +7,6 @@ import {
   Image,
 } from "react-native";
 import firebase from "../utils/firebase";
-// import { IconButton } from "../components/Buttons";
-import Icon from "react-native-vector-icons/FontAwesome5";
 import { Alert } from "react-native";
 
 const CitySearch = ({ result, navigation }) => {
@@ -47,7 +45,7 @@ const CitySearch = ({ result, navigation }) => {
   };
 
   const goBack = () => {
-    navigation.navigate("Cities");
+    navigation.navigate("Map");
   };
 
   return (

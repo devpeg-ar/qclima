@@ -2,6 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 import GetTemp from "../../utils/readApi";
 import OtherData from "../../components/otherWeatherData";
+import CodeWeather from "../../utils/const";
+
+let desc = "";
 
 export default function CityWeather({ route }) {
   const { city } = route.params;
@@ -9,6 +12,13 @@ export default function CityWeather({ route }) {
 
   const data = GetTemp(city, true);
   const temp = parseInt(data[0] - kelvin);
+  const code = data[2];
+
+  for (const key in CodeWeather) {
+    if (parseInt(key) === code) {
+      desc = CodeWeather[key];
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -27,10 +37,11 @@ export default function CityWeather({ route }) {
               uri: `http://openweathermap.org/img/w/${data[1]}.png`,
             }}
           />
-          <Text style={styles.temp}>
-            {temp}
+          <Text style={styles.description}>{desc}</Text>
+          <View style={styles.temp}>
+            <Text style={styles.number}>{temp}</Text>
             <Text style={styles.celcius}>&#x2103;</Text>
-          </Text>
+          </View>
         </View>
         <View style={styles.otherData}>
           <OtherData city={city} />
@@ -62,10 +73,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     width: "90%",
+    shadowColor: "#2b235a",
+    elevation: 20,
   },
   data: {
     flex: 1,
-    // flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
@@ -75,14 +87,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   temp: {
+    flexDirection: "row",
+  },
+  number: {
     fontSize: 120,
     color: "#f1f1f1",
     fontWeight: "bold",
   },
   celcius: {
     fontSize: 40,
-    lineHeight: 120,
     color: "#f1f1f1",
+    lineHeight: 120,
   },
   image: {
     width: 100,
@@ -90,5 +105,10 @@ const styles = StyleSheet.create({
   },
   otherData: {
     flex: 1,
+    marginVertical: 10,
+  },
+  description: {
+    color: "#f1f1f1",
+    fontSize: 16,
   },
 });

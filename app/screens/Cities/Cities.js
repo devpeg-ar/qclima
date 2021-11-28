@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { FAB } from "react-native-paper";
 import CitiesList from "../../components/CitiesList";
-import Loading from "../../components/Loading";
 
 export default function Cities({ navigation }) {
   return (
