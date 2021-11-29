@@ -1,4 +1,4 @@
-# Q Weather
+# Q Clima
 _Proyecto grupal para el curso de especialización en desarrollo mobile de IBM._
 
 ## Instalación:
