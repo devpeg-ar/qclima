@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { FAB, Portal, Provider } from "react-native-paper";
 
 export function SearchButton(props) {
   const { onPress, text } = props;

@@ -5,25 +5,8 @@ import firebase from "../utils/firebase";
 import CityListTemp from "../components/CityListTemp";
 import { color } from "react-native-elements/dist/helpers";
 
-export default function CitiesList({ navigation }) {
-  const [cities, setCities] = useState([]);
-
-  useEffect(() => {
-    firebase.db.collection("cities").onSnapshot((querySnapshot) => {
-      const cities = [];
-
-      querySnapshot.docs.forEach((doc) => {
-        const { nameCity, latCity, lonCity } = doc.data();
-        cities.push({
-          id: doc.id,
-          nameCity,
-          latCity,
-          lonCity,
-        });
-      });
-      setCities(cities);
-    });
-  }, []);
+export default function CitiesList({ navigation, cities }) {
+  const { nameCity } = cities;
 
   const deleteCity = async (city) => {
     const dbRef = firebase.db.collection("cities").doc(city.id);

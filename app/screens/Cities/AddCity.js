@@ -30,7 +30,6 @@ export default function AddCity({ navigation }) {
           const answer = await fetch(urlApi);
           const result = await answer.json();
           saveResult(result);
-          console.log(result);
           saveQuery(false);
         } catch (error) {
           console.log(error);

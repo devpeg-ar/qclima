@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Col, Row, Grid } from "react-native-easy-grid";
 import ReadApi from "../utils/readApi";
 
 export default function otherWeatherData({ city }) {
