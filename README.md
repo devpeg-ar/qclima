@@ -35,5 +35,7 @@ Esto instalará las dependencias necesarias para la ejecución del proyecto. Ter
 
 ### Paper Prototyping
 A continuación se muestra el  [Paper Prototyping](https://www.figma.com/file/vBVv3NP1MPgFDVNWRLyGkI/Untitled?node-id=0%3A1).
-El cual es interactivo y  haciendo click en los botones te redirige a las diferentes interfaces.
+El cual es interactivo y  haciendo click en los botones te redirige a las diferentes interfaces. También puedes acceder al
+[Personal Canvas](https://bit.ly/3I4DY9D) en formato powerpoint donde describimos los distintos elementos del modelo de negocio
+de nuestra empresa como así también de la competencia. 
 
