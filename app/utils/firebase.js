@@ -3,12 +3,12 @@ import "firebase/firestore";
 // import firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAhngtImjh381_g0SnAcx1vkRh4rNUNH9Q",
-  authDomain: "wheater-app-b4c60.firebaseapp.com",
-  projectId: "wheater-app-b4c60",
-  storageBucket: "wheater-app-b4c60.appspot.com",
-  messagingSenderId: "765351359640",
-  appId: "1:765351359640:web:95ccd682822d3582364ced",
+  apiKey: "AIzaSyCs9cmK_gb8TDtKjv1Ay53NtBk2do28wXA",
+  authDomain: "qclima-app.firebaseapp.com",
+  projectId: "qclima-app",
+  storageBucket: "qclima-app.appspot.com",
+  messagingSenderId: "47055886081",
+  appId: "1:47055886081:web:2198bd9d33a1c994fcad00"
 };
 
 // Initialize Firebase
